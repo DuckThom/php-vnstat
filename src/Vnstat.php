@@ -36,16 +36,6 @@ class Vnstat implements VnstatInterface
     /**
      * @var string
      */
-    protected $outputType = 'json';
-
-    /**
-     * @var array
-     */
-    protected $arguments = [];
-
-    /**
-     * @var string
-     */
     protected $executable;
 
     /**
@@ -67,6 +57,7 @@ class Vnstat implements VnstatInterface
      * Find the vnstat executable.
      *
      * @return $this
+     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
      */
     protected function findVnstat()
     {
@@ -87,6 +78,7 @@ class Vnstat implements VnstatInterface
      * Run the query
      *
      * @return \stdClass
+     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
      */
     public function run()
     {
