@@ -1,0 +1,30 @@
+{
+    "name": "luna/php-vnstat",
+    "description": "PHP Wrapper for the command line app 'vnstat'",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "larapack/dd": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Wiringa",
+            "email": "thomas.wiringa@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/process": "^3.2",
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Luna\\Vnstat\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    }
+}
