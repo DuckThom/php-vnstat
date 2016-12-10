@@ -1,6 +1,8 @@
 # php-vnstat
 vnstat json output parser for PHP
 
+[![StyleCI](https://styleci.io/repos/75982156/shield?branch=develop)](https://styleci.io/repos/75982156)
+
 ## Usage
 
 ```php
