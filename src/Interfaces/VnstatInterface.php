@@ -11,6 +11,13 @@ namespace Luna\Vnstat\Interfaces;
 interface VnstatInterface
 {
     /**
+     * VnstatInterface constructor.
+     *
+     * @param  string  $interface
+     */
+    public function __construct($interface);
+
+    /**
      * Query the VnStat database.
      *
      * @param  string  interface
@@ -19,27 +26,37 @@ interface VnstatInterface
     public static function get($interface);
 
     /**
+     * Fetch the interface data.
+     *
      * @return \stdClass
      */
     public function run();
 
     /**
+     * Get the executable path.
+     *
      * @return string
      */
     public function getExecutablePath();
 
     /**
+     * Set the executable path.
+     *
      * @param  string  $executable
      * @return mixed
      */
     public function setExecutablePath($executable);
 
     /**
+     * Get the json object.
+     *
      * @return \stdClass
      */
     public function getJson();
 
     /**
+     * Set the json object.
+     *
      * @param  string  $json
      * @return $this
      */
