@@ -1,6 +1,6 @@
 {
-    "name": "luna/php-vnstat",
-    "description": "PHP Wrapper for the command line app 'vnstat'",
+    "name": "luna/vnstat",
+    "description": "PHP wrapper for the command line app 'vnstat'",
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^5.7",
