@@ -3,6 +3,7 @@
 namespace Luna\Vnstat;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Luna\Vnstat\Exceptions\ExecutableNotFoundException;
 use Luna\Vnstat\Exceptions\InvalidJsonException;
 use Symfony\Component\Process\ProcessBuilder;
 use Luna\Vnstat\Interfaces\VnstatInterface;
@@ -16,8 +17,6 @@ use Symfony\Component\Process\Process;
  */
 class Vnstat implements VnstatInterface
 {
-    const BASE_COMMAND = 'vnstat';
-
     /**
      * @var string
      */
@@ -45,8 +44,6 @@ class Vnstat implements VnstatInterface
      */
     public function __construct($interface)
     {
-        $this->findVnstat();
-
         // Keep the command line empty for now
         $this->process = new ProcessBuilder;
         $this->process->setPrefix($this->executable);
@@ -57,7 +54,7 @@ class Vnstat implements VnstatInterface
      * Find the vnstat executable.
      *
      * @return $this
-     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
+     * @throws ExecutableNotFoundException
      */
     protected function findVnstat()
     {
@@ -66,7 +63,7 @@ class Vnstat implements VnstatInterface
         $finder->run();
 
         if (!$finder->isSuccessful()) {
-            throw new ProcessFailedException($finder);
+            throw new ExecutableNotFoundException($finder->getErrorOutput());
         }
 
         $this->setExecutablePath(trim($finder->getOutput()));
@@ -82,6 +79,8 @@ class Vnstat implements VnstatInterface
      */
     public function run()
     {
+        $this->findVnstat();
+
         $process = $this->process->getProcess();
         $process->run();
 

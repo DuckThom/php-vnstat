@@ -34,12 +34,31 @@ class VnstatTest extends TestCase
 
     /**
      * @test
+     * @expectedException \Luna\Vnstat\Exceptions\ExecutableNotFoundException
+     */
+    public function throws_exception_if_executable_is_not_found()
+    {
+        $mock = $this->getMockBuilder(Vnstat::class)
+            ->setConstructorArgs(['test'])
+            ->setMethods(['findVnstat'])
+            ->getMock();
+
+        $mock->expects($this->once())
+            ->method('findVnstat')
+            ->willThrowException(new \Luna\Vnstat\Exceptions\ExecutableNotFoundException);
+
+        $mock->setExecutablePath('foo');
+        $mock->run();
+    }
+
+    /**
+     * @test
      * @expectedException \Luna\Vnstat\Exceptions\InvalidJsonException
      */
     public function throws_exception_on_invalid_json()
     {
         $vnstat = new Vnstat('test');
 
-        $this->assertInstanceOf(Vnstat::class, $vnstat->setJson(''));
+        $this->assertInstanceOf(Vnstat::class, $vnstat->setJson('invalid_json'));
     }
 }

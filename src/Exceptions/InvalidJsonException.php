@@ -4,6 +4,12 @@ namespace Luna\Vnstat\Exceptions;
 
 use Exception;
 
+/**
+ * Class InvalidJsonException
+ *
+ * @package Luna\Vnstat\Exceptions
+ * @author  Thomas Wiringa <thomas.wiringa@gmail.com>
+ */
 class InvalidJsonException extends \Exception
 {
     /**
