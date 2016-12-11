@@ -42,15 +42,21 @@ class Vnstat implements VnstatInterface
      *
      * @param  string|array  $interface
      */
-    public function __construct($interface)
+    public function __construct($interface = null)
     {
         if (is_array($interface)) {
             $interface = implode('+', $interface);
         }
 
+        if ($interface === null) {
+            $arguments = ["--query", "--json"];
+        } else {
+            $arguments = ["--query", "--json", "-i", $interface];
+        }
+
         // Keep the command line empty for now
         $this->process = new ProcessBuilder;
-        $this->process->setArguments(["--query", "--json", "-i", $interface]);
+        $this->process->setArguments($arguments);
     }
 
     /**
@@ -104,7 +110,7 @@ class Vnstat implements VnstatInterface
      * @param  string|array  $interface
      * @return \stdClass
      */
-    public static function get($interface)
+    public static function get($interface = null)
     {
         $vnstat = new static($interface);
 
