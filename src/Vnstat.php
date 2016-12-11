@@ -40,13 +40,16 @@ class Vnstat implements VnstatInterface
     /**
      * Constructor.
      *
-     * @param  string  $interface
+     * @param  string|array  $interface
      */
     public function __construct($interface)
     {
+        if (is_array($interface)) {
+            $interface = implode('+', $interface);
+        }
+
         // Keep the command line empty for now
         $this->process = new ProcessBuilder;
-        $this->process->setPrefix($this->executable);
         $this->process->setArguments(["--query", "--json", "-i", $interface]);
     }
 
@@ -67,6 +70,8 @@ class Vnstat implements VnstatInterface
         }
 
         $this->setExecutablePath(trim($finder->getOutput()));
+
+        $this->process->setPrefix($this->executable);
 
         return $this;
     }
@@ -96,7 +101,7 @@ class Vnstat implements VnstatInterface
     /**
      * Create a new instance
      *
-     * @param  string  $interface
+     * @param  string|array  $interface
      * @return \stdClass
      */
     public static function get($interface)
