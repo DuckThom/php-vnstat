@@ -2,6 +2,7 @@
 
 namespace Luna\Vnstat;
 use Luna\Vnstat\Response\NetworkInterface;
+use Luna\Vnstat\Traits\ToJson;
 
 /**
  * Class VnstatResponse
@@ -11,15 +12,17 @@ use Luna\Vnstat\Response\NetworkInterface;
  */
 class VnstatResponse
 {
+    use ToJson;
+
     /**
      * @var string
      */
-    protected $vnstat_version;
+    public $vnstat_version;
 
     /**
      * @var array
      */
-    protected $interfaces;
+    public $interfaces;
 
     /**
      * Response constructor.

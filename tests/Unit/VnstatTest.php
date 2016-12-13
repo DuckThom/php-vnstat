@@ -5,8 +5,9 @@ use \Luna\Vnstat\Vnstat;
 /**
  * Class VnstatTest
  *
- * @package Luna\Vnstat
- * @author  Thomas Wiringa <thomas.wiringa@gmail.com>
+ * @package     Luna\Vnstat
+ * @category    tests
+ * @author      Thomas Wiringa <thomas.wiringa@gmail.com>
  */
 class VnstatTest extends TestCase
 {
