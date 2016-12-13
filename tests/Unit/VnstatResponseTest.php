@@ -1,5 +1,6 @@
 <?php
 
+use Luna\Vnstat\VnstatResponse;
 use \Luna\Vnstat\Vnstat;
 
 /**
@@ -21,9 +22,18 @@ class VnstatResponseTest extends TestCase
         $testdata->vnstatversion = '0';
         $testdata->interfaces = [];
 
-        $response = new \Luna\Vnstat\VnstatResponse($testdata);
+        $response = new VnstatResponse(json_encode($testdata));
 
         $this->assertEquals('{"vnstat_version":"0","interfaces":[]}', (string) $response);
+    }
+
+    /**
+     * @test
+     * @expectedException \Luna\Vnstat\Exceptions\InvalidJsonException
+     */
+    public function throws_exception_on_invalid_json()
+    {
+        new VnstatResponse('test');
     }
 
 }

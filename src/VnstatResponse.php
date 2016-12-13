@@ -1,6 +1,8 @@
 <?php
 
 namespace Luna\Vnstat;
+
+use Luna\Vnstat\Exceptions\InvalidJsonException;
 use Luna\Vnstat\Response\NetworkInterface;
 use Luna\Vnstat\Traits\ToJson;
 
@@ -27,10 +29,17 @@ class VnstatResponse
     /**
      * Response constructor.
      *
-     * @param \stdClass $json
+     * @param  string  $json
+     * @throws InvalidJsonException
      */
-    public function __construct(\stdClass $json)
+    public function __construct($json)
     {
+        $json = json_decode($json);
+
+        if (!$json) {
+            throw new InvalidJsonException;
+        }
+
         $this->setVnstatVersion($json->vnstatversion);
 
         $this->setInterfaces($json->interfaces);

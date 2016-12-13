@@ -24,13 +24,13 @@ interface VnstatInterface
      *
      * @return VnstatResponse
      */
-    public function parseJson();
+    public function getResponse();
 
     /**
      * Query the VnStat database.
      *
      * @param  string  $interface
-     * @return \stdClass
+     * @return VnstatResponse
      */
     public static function get($interface);
 
@@ -59,7 +59,7 @@ interface VnstatInterface
     /**
      * Get the json object.
      *
-     * @return \stdClass
+     * @return string
      */
     public function getJson();
 

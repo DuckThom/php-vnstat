@@ -4,7 +4,6 @@ namespace Luna\Vnstat;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Luna\Vnstat\Exceptions\ExecutableNotFoundException;
-use Luna\Vnstat\Exceptions\InvalidJsonException;
 use Symfony\Component\Process\ProcessBuilder;
 use Luna\Vnstat\Interfaces\VnstatInterface;
 use Symfony\Component\Process\Process;
@@ -18,12 +17,12 @@ use Symfony\Component\Process\Process;
 class Vnstat implements VnstatInterface
 {
     /**
-     * @var string
+     * @var VnstatResponse
      */
     protected $response;
 
     /**
-     * @var \stdClass
+     * @var string
      */
     protected $json;
 
@@ -107,18 +106,22 @@ class Vnstat implements VnstatInterface
     /**
      * Parse the json to a normalized class
      *
-     * @return Response
+     * @return VnstatResponse
      */
-    public function parseJson()
+    public function getResponse()
     {
-        return new VnstatResponse($this->getJson());
+        if (!isset($this->response)) {
+            $this->response = new VnstatResponse($this->getJson());
+        }
+
+        return $this->response;
     }
 
     /**
      * Create a new instance
      *
      * @param  string|array  $interface
-     * @return Response
+     * @return VnstatResponse
      */
     public static function get($interface = null)
     {
@@ -126,7 +129,7 @@ class Vnstat implements VnstatInterface
 
         $vnstat->run();
 
-        return $vnstat->parseJson();
+        return $vnstat->getResponse();
     }
 
     /**
@@ -149,7 +152,7 @@ class Vnstat implements VnstatInterface
     }
 
     /**
-     * @return \stdClass
+     * @return string
      */
     public function getJson()
     {
@@ -159,16 +162,11 @@ class Vnstat implements VnstatInterface
     /**
      * @param  string  $json
      * @return $this
-     * @throws InvalidJsonException
      */
     public function setJson($json)
     {
-        $this->json = json_decode($json);
+        $this->json = $json;
 
-        if ($this->json) {
-            return $this;
-        } else {
-            throw new InvalidJsonException;
-        }
+        return $this;
     }
 }
