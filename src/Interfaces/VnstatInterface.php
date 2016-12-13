@@ -2,6 +2,8 @@
 
 namespace Luna\Vnstat\Interfaces;
 
+use Luna\Vnstat\VnstatResponse;
+
 /**
  * Interface VnstatInterface
  *
@@ -18,9 +20,16 @@ interface VnstatInterface
     public function __construct($interface);
 
     /**
+     * Parse the stored \stdClass to a normalized response
+     *
+     * @return VnstatResponse
+     */
+    public function parseJson();
+
+    /**
      * Query the VnStat database.
      *
-     * @param  string  interface
+     * @param  string  $interface
      * @return \stdClass
      */
     public static function get($interface);

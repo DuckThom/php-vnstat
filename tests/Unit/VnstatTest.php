@@ -61,4 +61,12 @@ class VnstatTest extends TestCase
 
         $this->assertInstanceOf(Vnstat::class, $vnstat->setJson('invalid_json'));
     }
+
+    /**
+     * @test
+     */
+    public function returns_correct_response_on_success()
+    {
+        $this->assertInstanceOf(\Luna\Vnstat\VnstatResponse::class, Vnstat::get('wlp2s0'));
+    }
 }

@@ -85,7 +85,7 @@ class Vnstat implements VnstatInterface
     /**
      * Run the query
      *
-     * @return \stdClass
+     * @return $this
      * @throws \Symfony\Component\Process\Exception\ProcessFailedException
      */
     public function run()
@@ -101,14 +101,24 @@ class Vnstat implements VnstatInterface
 
         $this->setJson(trim($process->getOutput()));
 
-        return $this->getJson();
+        return $this;
+    }
+
+    /**
+     * Parse the json to a normalized class
+     *
+     * @return Response
+     */
+    public function parseJson()
+    {
+        return new VnstatResponse($this->getJson());
     }
 
     /**
      * Create a new instance
      *
      * @param  string|array  $interface
-     * @return \stdClass
+     * @return Response
      */
     public static function get($interface = null)
     {
@@ -116,7 +126,7 @@ class Vnstat implements VnstatInterface
 
         $vnstat->run();
 
-        return $vnstat->getJson();
+        return $vnstat->parseJson();
     }
 
     /**
