@@ -2,6 +2,8 @@
 vnstat json output parser for PHP
 
 [![StyleCI](https://styleci.io/repos/75982156/shield?branch=master)](https://styleci.io/repos/75982156)
+[![License](https://poser.pugx.org/luna/vnstat/license?format=flat-square)](https://packagist.org/packages/luna/vnstat)
+[![Total Downloads](https://poser.pugx.org/luna/vnstat/downloads?format=flat-square)](https://packagist.org/packages/luna/vnstat)
 
 ## Usage
 
