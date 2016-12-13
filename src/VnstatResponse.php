@@ -1,6 +1,7 @@
 <?php
 
 namespace Luna\Vnstat;
+
 use Luna\Vnstat\Response\NetworkInterface;
 use Luna\Vnstat\Traits\ToJson;
 
