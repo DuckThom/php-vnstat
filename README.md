@@ -20,7 +20,10 @@ class YourClass extends Awesomeness implements Ideas
   public function runWithNewInstance()
   {
     $vnstat = new Vnstat($this->interface);
-    $jsonObject = $vnstat->run();
+    $vnstat->run();
+    
+    $rawJson = $vnstat->getJson();
+    $response = $vnstat->getResponse();
   }
 }
 ```
@@ -32,7 +35,11 @@ public function Vnstat::__construct(string $interface): void
 ```
 
 ```php
-public function Vnstat::get(string $interface): \stdClass
+public function Vnstat::get(string $interface): \Luna\Vnstat\VnstatResponse
+```
+
+```php
+public function Vnstat::getResponse(): \Luna\Vnstat\VnstatResponse
 ```
 
 ```php
@@ -48,12 +55,12 @@ public function Vnstat::setJson(string $json): $this
 ```
 
 ```php
-public function Vnstat::getJson(): \stdClass
+public function Vnstat::getJson(): string
 ```
 
 ## Errors/Exceptions
 
-Throws `Luna\Vnstat\Exceptions\InvalidJsonException` if the json string returned by vnstat was not parsable to an object.
+Throws `Luna\Vnstat\Exceptions\InvalidJsonException` if the string returned by `Vnstat::getJson()` was an invalid json string.
 
 Throws `Luna\Vnstat\Exceptions\ExecutableNotFoundException` if `which vnstat` failed.
 
