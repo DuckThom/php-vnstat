@@ -35,5 +35,4 @@ class VnstatResponseTest extends TestCase
     {
         new VnstatResponse('test');
     }
-
 }
