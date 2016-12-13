@@ -25,5 +25,4 @@ class VnstatResponseTest extends TestCase
 
         $this->assertEquals('{"vnstat_version":"0","interfaces":[]}', (string) $response);
     }
-
 }
