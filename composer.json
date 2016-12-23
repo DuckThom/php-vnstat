@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "symfony/process": "^3.2",
+        "symfony/process": "^2.6|~3.0",
         "php": ">=5.6",
         "nesbot/carbon": "^1.21"
     },
